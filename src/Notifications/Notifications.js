@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import request from 'request';
+import axios from 'axios';
 
 import NotificationItem from './NotificationItem';
 
@@ -19,11 +19,6 @@ class Notifications extends Component {
 
     getNotifications() {
 
-      // request('https://us-east-api.stream-io-api.com/api/v1.0/feed/notification/scott/?api_key=a2h6fsbzmqu2', { json: true }, (err, res, body) => {
-      //   if (err) { return console.log(err); }
-      //   console.log(body.url);
-      //   console.log(body.explanation);
-      // });
       const options = {
         url: 'https://us-east-api.stream-io-api.com/api/v1.0/feed/notification/scott/?api_key=a2h6fsbzmqu2',
         headers: {
@@ -33,14 +28,16 @@ class Notifications extends Component {
         }
       };
 
-    function callback(error, response, body) {
-      if (!error && response.statusCode == 200) {
-        const info = JSON.parse(body);
-        console.log(info);
-      }
-    }
+      axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
+  .then(response => {
+    console.log(response.data.url);
+    console.log(response.data.explanation);
+  })
+  .catch(error => {
+    console.log(error);
+  });
 
-    request(options, callback);
+
         // const _this = this;
         // this.state.feed.get({mark_seen:true})
         //     .then(function(data) {
