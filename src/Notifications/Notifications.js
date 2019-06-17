@@ -10,16 +10,17 @@ class Notifications extends Component {
         // feed: props.streamClient.feed('notification', 'scott', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoic2NvdHQifQ.Wz7h0B-LAOSRAWVFT5urvKImRcdabmegzmxy15kVCDc'),
         notifications: []
       };
+      this.getNotifications = this.getNotifications.bind(this);
     }
   
     componentDidMount() {
-        // this.getNotifications();
+        this.getNotifications();
         // this.subscribeToNotifications();
     }
 
     getNotifications() {
-
       const options = {
+        method: 'GET',
         url: 'https://us-east-api.stream-io-api.com/api/v1.0/feed/notification/scott/?api_key=a2h6fsbzmqu2',
         headers: {
           "Content-Type": "application/json",
@@ -28,14 +29,19 @@ class Notifications extends Component {
         }
       };
 
-      axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
-  .then(response => {
-    console.log(response.data.url);
-    console.log(response.data.explanation);
-  })
-  .catch(error => {
-    console.log(error);
-  });
+      axios(options)
+      .then(response => {
+        if (response.data && response.data.results && response.data.results.length > 0) {
+          this.setState({
+              notifications: response.data.results
+          })
+        }
+        console.log("Retrieved feed!", response.data);
+      })
+      .catch(error => {
+        console.log('Error while getting notifications');
+        console.log(error);
+      });
 
 
         // const _this = this;
