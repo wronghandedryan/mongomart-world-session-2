@@ -141,3 +141,100 @@ img.product {
 .covert-button.error {
   color: red;
 }
+
+#notifications {
+  position: relative;
+  margin-right: 15px;
+}
+
+#notifications .body {
+  display: none;
+  position: absolute;
+}
+
+#notifications:hover .body {
+  display: block;
+}
+
+#notifications .icon {
+  font-size: 1.75em;
+  /* padding-top: 7px; */
+  line-height: 34px;
+}
+
+#notifications.active .icon {
+  color: white;
+  background-color: transparent;
+}
+
+#notifications .counter {
+  display: none;
+  height: 3em;
+  top: 7px;
+  width: 3em;
+  position: absolute;
+  right: -25px;
+}
+
+#notifications.active .counter {
+  display: block;
+}
+
+#notifications span.counter-number {
+  color: white;
+  font-size: 1em;
+  position: absolute;
+  width: 1.5em;
+  text-align: center;
+  z-index: 999;
+}
+
+#notifications .counter-border {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid #5cb85c;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+#main-nav-right > li > a {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.dropdown-menu .divider {
+  overflow: visible;
+  margin: 18px 0 9px;
+  position: relative;
+}
+
+#notifications .body .notification-item span, #notifications .body .notification-item button {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.42857143;
+  color: #333;
+  white-space: nowrap;
+}
+
+#notifications .body .notification-item span:hover, #notifications .body .notification-item button:hover {
+  color: #262626;
+  background-color: #eee;
+}
+
+#notifications .body .notification-item button {
+  border: 0;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown-menu .divider .group-label {
+  background-color: white;
+  position: absolute;
+  left: 10px;
+  top: -10px;
+  padding: 0 9px;
+  font-weight: bold;
+  width: 4em;
+}

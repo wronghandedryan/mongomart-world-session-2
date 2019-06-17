@@ -5,10 +5,12 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Stitch, AnonymousCredential } from 'mongodb-stitch-browser-sdk';
+import stream from 'getstream';
 
 import { stitchAppId, stitchClusterNames, dbName, collNames } from './config';
 import Cart from './src/Cart/Cart';
 import Home from './src/Home';
+import Notifications from './src/Notifications/Notifications';
 import ImportData from './src/Import/ImportData';
 import ProductItemDetail from './src/ProductDetail/ProductItemDetail';
 
@@ -24,7 +26,8 @@ export default class Routing extends Component {
       client: client,
       clientAuthenticated: client.auth.loginWithCredential(
         new AnonymousCredential()
-      )
+      ),
+      streamClient: stream.connect('a2h6fsbzmqu2', null, '52613'),
     };
   }
 
@@ -74,6 +77,7 @@ export default class Routing extends Component {
                       </button>
                     </Link>
                   </li>
+                  <Notifications {...this.state} />
                 </ul>
               </div>
             </div>
