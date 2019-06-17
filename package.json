@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "mongodb-stitch-browser-sdk": "^4.2.0",
-    "query-string": "^6.2.0",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
-    "react-router-dom": "^4.3.1",
-    "safer-buffer": "^2.1.2",
-    "underscore": "^1.9.1"
+    "mongodb-stitch-browser-sdk": "4.4.1",
+    "query-string": "6.7.0",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-router-dom": "4.3.1",
+    "request": "^2.88.0",
+    "safer-buffer": "2.1.2",
+    "underscore": "1.9.1"
   },
   "scripts": {
     "start": "react-scripts start",

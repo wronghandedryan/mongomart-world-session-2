@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import request from 'request';
 
 import NotificationItem from './NotificationItem';
 
@@ -6,30 +7,53 @@ class Notifications extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        feed: props.streamClient.feed('notification', 'scott', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoic2NvdHQifQ.Wz7h0B-LAOSRAWVFT5urvKImRcdabmegzmxy15kVCDc'),
+        // feed: props.streamClient.feed('notification', 'scott', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoic2NvdHQifQ.Wz7h0B-LAOSRAWVFT5urvKImRcdabmegzmxy15kVCDc'),
         notifications: []
       };
     }
   
     componentDidMount() {
-        this.getNotifications();
-        this.subscribeToNotifications();
+        // this.getNotifications();
+        // this.subscribeToNotifications();
     }
 
     getNotifications() {
-        const _this = this;
-        this.state.feed.get({mark_seen:true})
-            .then(function(data) {
-                if (data && data.results && data.results.length > 0) {
-                    _this.setState({
-                        notifications: data.results
-                    })
-                }
-                console.log("Retrieved feed!", data);
-            }).catch(function(err) {
-                console.log('Error while getting notifications');
-                console.log(err);
-            });
+
+      // request('https://us-east-api.stream-io-api.com/api/v1.0/feed/notification/scott/?api_key=a2h6fsbzmqu2', { json: true }, (err, res, body) => {
+      //   if (err) { return console.log(err); }
+      //   console.log(body.url);
+      //   console.log(body.explanation);
+      // });
+      const options = {
+        url: 'https://us-east-api.stream-io-api.com/api/v1.0/feed/notification/scott/?api_key=a2h6fsbzmqu2',
+        headers: {
+          "Content-Type": "application/json",
+          "Stream-Auth-Type": "jwt",
+          "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY3Rpb24iOiIqIiwiZmVlZF9pZCI6IioiLCJyZXNvdXJjZSI6IioifQ._viQA2NCz5tLdzzQF7dPTaWXvQLNrXzHenbrWvlajUM"
+        }
+      };
+
+    function callback(error, response, body) {
+      if (!error && response.statusCode == 200) {
+        const info = JSON.parse(body);
+        console.log(info);
+      }
+    }
+
+    request(options, callback);
+        // const _this = this;
+        // this.state.feed.get({mark_seen:true})
+        //     .then(function(data) {
+        //         if (data && data.results && data.results.length > 0) {
+        //             _this.setState({
+        //                 notifications: data.results
+        //             })
+        //         }
+        //         console.log("Retrieved feed!", data);
+        //     }).catch(function(err) {
+        //         console.log('Error while getting notifications');
+        //         console.log(err);
+        //     });
     }
 
     subscribeToNotifications() {
