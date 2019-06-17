@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { RemoteMongoClient } from 'mongodb-stitch-browser-sdk';
 
+import { stitchClusterNames, dbName, collNames } from '../config';
+
 export default class AddToCartHOC extends Component {
   constructor(props) {
     super(props);
@@ -9,9 +11,9 @@ export default class AddToCartHOC extends Component {
       db: props.client
         .getServiceClient(
           RemoteMongoClient.factory,
-          props.stitchClusterNames.users
+          stitchClusterNames.users
         )
-        .db('mongomart'),
+        .db(dbName),
       isAddedToCart: false,
     };
     this.handleAddToCart = this.handleAddToCart.bind(this);
@@ -36,7 +38,7 @@ export default class AddToCartHOC extends Component {
     this.props.clientAuthenticated
       .then(() =>
         // increment quantity by one
-        this.state.db.collection('users').updateOne(incQuery, incUpdate)
+        this.state.db.collection(collNames.users).updateOne(incQuery, incUpdate)
       )
       .then(response => {
         if (response && response.modifiedCount !== 1) {
@@ -70,7 +72,7 @@ export default class AddToCartHOC extends Component {
     this.props.clientAuthenticated
       .then(() =>
         this.state.db
-          .collection('users')
+          .collection(collNames.users)
           .updateOne(addQuery, addUpdate, options)
       )
       .then(() => {
@@ -93,12 +95,12 @@ export default class AddToCartHOC extends Component {
         RemoteMongoClient.factory,
         this.props.stitchClusterNames.products
       )
-      .db('mongomart');
+      .db(dbName);
 
     return this.props.clientAuthenticated
       .then(() =>
         db
-          .collection('item')
+          .collection(collNames.item)
           .find({ _id: itemId }, { limit: 1 })
           .asArray()
       )

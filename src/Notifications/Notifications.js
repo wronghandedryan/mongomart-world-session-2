@@ -10,7 +10,7 @@ class Notifications extends Component {
         // feed: props.streamClient.feed('notification', 'scott', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoic2NvdHQifQ.Wz7h0B-LAOSRAWVFT5urvKImRcdabmegzmxy15kVCDc'),
         notifications: []
       };
-      this.getNotifications = this.getNotifications.bind(this);
+      // this.getNotifications = this.getNotifications.bind(this);
     }
   
     componentDidMount() {
@@ -19,6 +19,8 @@ class Notifications extends Component {
     }
 
     getNotifications() {
+      // const _this = this;
+
       const options = {
         method: 'GET',
         url: 'https://us-east-api.stream-io-api.com/api/v1.0/feed/notification/scott/?api_key=a2h6fsbzmqu2',
@@ -94,6 +96,7 @@ class Notifications extends Component {
     }
 
     renderNotificationGroup(notificationGroup) {
+      console.log(this.props.client);
         if (notificationGroup && notificationGroup.activities) {
             return notificationGroup.activities.map((notification) => {
                 return <NotificationItem key={notification.id} notificationGroup={notificationGroup.group} notification={notification} {...this.props} />

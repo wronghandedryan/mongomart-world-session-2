@@ -77,7 +77,7 @@ export default class Routing extends Component {
                       </button>
                     </Link>
                   </li>
-                  <Notifications/>
+                  <Notifications {...this.state} />
                 </ul>
               </div>
             </div>
