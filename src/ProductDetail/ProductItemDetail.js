@@ -7,6 +7,7 @@ import Error from '../Error';
 import AddToCart from './AddToCart';
 import LatestReviews from '../LatestReviews/LatestReviews';
 import ProductRating from '../ProductRating/ProductRating';
+import UpdateStockButton from './UpdateStockButton';
 
 export default class ProductItemDetail extends Component {
   constructor(props) {
@@ -134,6 +135,7 @@ export default class ProductItemDetail extends Component {
 
               <p>{item.description}</p>
               <AddToCart {...this.props} item={item} />
+              <UpdateStockButton {...this.props} item={item} />
             </div>
           </div>
         </React.Fragment>

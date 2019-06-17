@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { RemoteMongoClient } from 'mongodb-stitch-browser-sdk';
+import { BSON, RemoteMongoClient } from 'mongodb-stitch-browser-sdk';
 
 import { stitchClusterNames, dbName, collNames } from '../config';
 
@@ -88,12 +88,10 @@ export default class AddToCartHOC extends Component {
   }
 
   fetchProduct(productId) {
-    const itemId = parseInt(productId);
-
     const db = this.props.client
       .getServiceClient(
         RemoteMongoClient.factory,
-        this.props.stitchClusterNames.products
+        stitchClusterNames.products
       )
       .db(dbName);
 
@@ -101,11 +99,13 @@ export default class AddToCartHOC extends Component {
       .then(() =>
         db
           .collection(collNames.item)
-          .find({ _id: itemId }, { limit: 1 })
+          .find({ _id: productId }, { limit: 1 })
           .asArray()
       )
       .then(response => {
+        console.log(response);
         if (response && response[0]) {
+          console.log(response[0]);
           return response[0];
         }
       })
