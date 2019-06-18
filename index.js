@@ -1,11 +1,7 @@
-// workaround for buffer bug in Stackblitz
-global.Buffer = require('safer-buffer').Buffer;
-
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Stitch, AnonymousCredential } from 'mongodb-stitch-browser-sdk';
-// import stream from 'getstream';
 
 import { stitchAppId, stitchClusterNames, dbName, collNames } from './config';
 import Cart from './src/Cart/Cart';
@@ -27,7 +23,6 @@ export default class Routing extends Component {
       clientAuthenticated: client.auth.loginWithCredential(
         new AnonymousCredential()
       ),
-      // streamClient: stream.connect('a2h6fsbzmqu2', null, '52613'),
     };
   }
 

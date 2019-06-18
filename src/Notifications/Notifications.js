@@ -15,7 +15,6 @@ class Notifications extends Component {
   
     componentDidMount() {
         this.getNotifications();
-        // this.subscribeToNotifications();
     }
 
     getNotifications() {
@@ -33,18 +32,18 @@ class Notifications extends Component {
         });
     }
 
-    subscribeToNotifications() {
-        const _this = this;
-        this.state.feed.subscribe(function(data) {
-            if (data && data.new && data.new.length > 0) {
-                const newNotifications = _this.state.notifications.push(data.new);
-                _this.setState({
-                    notifications: newNotifications
-                });
-            }
-            // console.log("Feed was updated!", data);
-        });
-    }
+    // subscribeToNotifications() {
+    //     const _this = this;
+    //     this.state.feed.subscribe(function(data) {
+    //         if (data && data.new && data.new.length > 0) {
+    //             const newNotifications = _this.state.notifications.push(data.new);
+    //             _this.setState({
+    //                 notifications: newNotifications
+    //             });
+    //         }
+    //         // console.log("Feed was updated!", data);
+    //     });
+    // }
 
     renderNotifications(notifications) {
         if (notifications && notifications.length > 0) {
