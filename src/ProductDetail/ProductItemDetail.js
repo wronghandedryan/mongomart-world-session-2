@@ -93,6 +93,8 @@ export default class ProductItemDetail extends Component {
     
     const imgUrl = item.img_url ? baseImgUrl + item.img_url : undefined;
 
+    const doAfterUpdateStock = () => { this.fetchProduct(); this.props.doAfterUpdateStock(); }
+
     if (!this.state.productError) {
       return (
         <React.Fragment>
@@ -136,7 +138,7 @@ export default class ProductItemDetail extends Component {
 
               <p>{item.description}</p>
               <AddToCart {...this.props} item={item} />
-              <UpdateStockButton {...this.props} doAfterUpdateStock={this.fetchProduct} item={item} />
+              <UpdateStockButton {...this.props} doAfterUpdateStock={doAfterUpdateStock} item={item} />
             </div>
           </div>
         </React.Fragment>

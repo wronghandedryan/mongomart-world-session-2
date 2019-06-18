@@ -10,11 +10,18 @@ class Notifications extends Component {
       this.state = {
         notifications: []
       };
+      this.refreshNotifications = this.refreshNotifications.bind(this);
+      this.getNotifications = this.getNotifications.bind(this);
       this.removeNotification = this.removeNotification.bind(this);
     }
   
     componentDidMount() {
+        this.props.setRefreshNotificationsCallback(this.refreshNotifications);
         this.getNotifications();
+    }
+
+    refreshNotifications() {
+      setTimeout(() => this.getNotifications(), 2000);
     }
 
     getNotifications() {

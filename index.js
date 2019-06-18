@@ -24,9 +24,23 @@ export default class Routing extends Component {
         new AnonymousCredential()
       ),
     };
+    this.setRefreshNotificationsCallback = this.setRefreshNotificationsCallback.bind(this);
+    this.doAfterUpdateStock = this.doAfterUpdateStock.bind(this);
   }
 
   componentDidMount() {}
+
+  setRefreshNotificationsCallback(cb) {
+    this.setState({
+      refreshNotifications: cb
+    });
+  }
+
+  doAfterUpdateStock() {
+    if (typeof this.state.refreshNotifications === "function") {
+      this.state.refreshNotifications();
+    }
+  }
 
   render() {
     return (
@@ -72,7 +86,7 @@ export default class Routing extends Component {
                       </button>
                     </Link>
                   </li>
-                  <Notifications {...this.state} />
+                  <Notifications {...this.state} setRefreshNotificationsCallback={this.setRefreshNotificationsCallback} />
                 </ul>
               </div>
             </div>
@@ -93,7 +107,7 @@ export default class Routing extends Component {
             />
             <Route
               path="/item/:id"
-              render={props => <ProductItemDetail {...props} {...this.state} />}
+              render={props => <ProductItemDetail doAfterUpdateStock={this.doAfterUpdateStock} {...props} {...this.state} />}
             />
           </div>
           <div className="container">
