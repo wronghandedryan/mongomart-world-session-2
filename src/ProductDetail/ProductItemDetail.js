@@ -16,6 +16,7 @@ export default class ProductItemDetail extends Component {
       item: {},
       productError: undefined
     };
+    this.fetchProduct = this.fetchProduct.bind(this);
   }
 
   componentDidMount() {
@@ -135,7 +136,7 @@ export default class ProductItemDetail extends Component {
 
               <p>{item.description}</p>
               <AddToCart {...this.props} item={item} />
-              <UpdateStockButton {...this.props} item={item} />
+              <UpdateStockButton {...this.props} doAfterUpdateStock={this.fetchProduct} item={item} />
             </div>
           </div>
         </React.Fragment>

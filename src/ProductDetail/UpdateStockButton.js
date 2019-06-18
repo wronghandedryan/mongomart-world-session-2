@@ -15,7 +15,7 @@ export default class UpdateStockButton extends Component {
 
   updateStock() {
     const itemId = this.props.item._id;
-    // const itemId = this.props.match.params.id;
+    const newStock = this.props.item.stock === 0 ? Math.floor(Math.random() * (30 - 1)) + 1 : 0; 
 
     const db = this.props.client
       .getServiceClient(
@@ -28,7 +28,7 @@ export default class UpdateStockButton extends Component {
       .then(() =>
         db
           .collection(collNames.item)
-          .updateOne({ _id: itemId }, { $inc: { stock: 1 }})
+          .updateOne({ _id: itemId }, { $set: { stock: newStock }})
       )
       .then(response => {
         const { matchedCount, modifiedCount } = response;
@@ -37,7 +37,7 @@ export default class UpdateStockButton extends Component {
                 updatedStock: true,
                 updateError: null
             });
-            console.log(`Successfully updated stock`)
+            this.props.doAfterUpdateStock();
         }
       })
       .catch(err => {
