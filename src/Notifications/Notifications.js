@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import { streamSettings, streamRequestOptions } from '../../config';
 import NotificationItem from './NotificationItem';
 
 class Notifications extends Component {
@@ -9,6 +10,7 @@ class Notifications extends Component {
       this.state = {
         notifications: []
       };
+      this.removeNotification = this.removeNotification.bind(this);
     }
   
     componentDidMount() {
@@ -17,29 +19,18 @@ class Notifications extends Component {
     }
 
     getNotifications() {
-      const options = {
-        method: 'GET',
-        url: 'https://us-east-api.stream-io-api.com/api/v1.0/feed/notification/scott/?api_key=a2h6fsbzmqu2',
-        headers: {
-          "Content-Type": "application/json",
-          "Stream-Auth-Type": "jwt",
-          "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY3Rpb24iOiIqIiwiZmVlZF9pZCI6IioiLCJyZXNvdXJjZSI6IioifQ._viQA2NCz5tLdzzQF7dPTaWXvQLNrXzHenbrWvlajUM"
-        }
-      };
-
-      axios(options)
-      .then(response => {
-        if (response.data && response.data.results && response.data.results.length > 0) {
-          this.setState({
-              notifications: response.data.results
-          })
-        }
-        console.log("Retrieved feed!", response.data);
-      })
-      .catch(error => {
-        console.log('Error while getting notifications');
-        console.log(error);
-      });
+        axios(streamRequestOptions)
+        .then(response => {
+            if (response.data && response.data.results && response.data.results.length > 0) {
+                this.setState({
+                    notifications: response.data.results
+                })
+            }
+        })
+        .catch(error => {
+            console.log('Error while getting notifications');
+            console.log(error);
+        });
     }
 
     subscribeToNotifications() {
@@ -79,16 +70,30 @@ class Notifications extends Component {
     renderNotificationGroup(notificationGroup) {
         if (notificationGroup && notificationGroup.activities) {
             return notificationGroup.activities.map((notification) => {
-                return <NotificationItem key={notification.id} notificationGroup={notificationGroup.group} notification={notification} {...this.props} />
+                return <NotificationItem key={notification.id} notificationGroup={notificationGroup.group} notification={notification} 
+                                         doAfterAddToCart={this.removeNotification} {...this.props} />
             });
         }
     }
 
-    addToCart(notification) {
-        this.removeNotification(notification);
+    removeNotification(notification) {
+        let newStreamRequestOptions = streamRequestOptions;
+        newStreamRequestOptions.method = 'DELETE';
+        newStreamRequestOptions.url = streamSettings.baseUrl + streamSettings.userId + '/' + notification.id + streamSettings.apiKeySuffix;
+
+        axios(newStreamRequestOptions)
+        .then(response => {
+            if (response.removed) {
+                this.removeNotificationFromState(notification);
+            }
+        })
+        .catch(error => {
+            console.log('Error while removing notification');
+            console.log(error);
+        });
     }
 
-    removeNotification(notification) {
+    removeNotificationFromState() {
         let updatedNotifications = this.state.notifications;
         updatedNotifications.forEach((notificationGroup, idx) => {
             const updatedActivities = notificationGroup.activities.filter(_notification => {

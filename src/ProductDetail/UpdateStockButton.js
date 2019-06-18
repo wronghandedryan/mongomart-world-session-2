@@ -59,16 +59,17 @@ export default class UpdateStockButton extends Component {
     if (!this.state.updateError) {
         if (!this.state.updatedStock) {
             return (
-                <button onClick={() => this.updateStock()}>Update Stock</button>
+                <button className="update-stock covert-button" onClick={() => this.updateStock()}>Update Stock</button>
             );
         } else {
             return (
-                <button disabled>Updated Stock</button>
+                <button disabled className="update-stock covert-button success">Updated Stock</button>
             );
         }
     } else {
       return (
         <Error
+          className="update-stock"
           message={'Error while updating stock!'}
           error={this.state.updateError}
           display={'small'}

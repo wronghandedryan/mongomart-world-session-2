@@ -128,6 +128,7 @@ img.product {
   border: 0;
   margin: 0;
   padding: 0;
+  background-color: transparent !important;
 }
 
 .covert-button:hover {
@@ -237,4 +238,15 @@ img.product {
   padding: 0 9px;
   font-weight: bold;
   width: 4em;
+}
+
+.update-stock {
+  position: absolute;
+  bottom: -91px;
+  left: -399px;
+  z-index: 9999;
+}
+
+.relative {
+  position: relative;
 }

@@ -123,7 +123,7 @@ export default class ProductItemDetail extends Component {
               }
             </div>
 
-            <div className="col-md-4">
+            <div className="col-md-4 relative">
               <h3>Product Description</h3>
 
               <div className="ratings">

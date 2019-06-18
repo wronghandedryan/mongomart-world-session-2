@@ -23,6 +23,9 @@ export default class AddToCartHOC extends Component {
 
   handleAddToCart() {
     this.incrementProductQuantity();
+    if (typeof this.props.doAfterAddToCart === "function" && this.props.notification) {
+      this.props.doAfterAddToCart(this.props.notification);
+    }
   }
 
   incrementProductQuantity() {
