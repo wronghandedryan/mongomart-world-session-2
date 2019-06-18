@@ -1,6 +1,7 @@
 exports = function(changeEvent) {
-  url = buildUrl("scott"); //replace by your user ID
-  authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY3Rpb24iOiIqIiwiZmVlZF9pZCI6IioiLCJyZXNvdXJjZSI6IioifQ._viQA2NCz5tLdzzQF7dPTaWXvQLNrXzHenbrWvlajUM"; // replace by your auth token
+  const userId = "robbert"; //replace by your user ID
+  const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY3Rpb24iOiIqIiwiZmVlZF9pZCI6Im5vdGlmaWNhdGlvbnJvYmJlcnQiLCJyZXNvdXJjZSI6ImZlZWQifQ.t-QyCjMWZmctow6UQrUipwEdcYWhN2358Pwt_ZqTO0A"; // replace by your auth token
+  const url = buildUrl(userId);
   sendNotifications(url, authToken, changeEvent);
 };
 

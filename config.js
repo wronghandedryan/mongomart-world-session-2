@@ -1,10 +1,10 @@
 // replace with your Stitch app ID
-const stitchAppId = 'mongomartstore-wxwos';
+const stitchAppId = 'mongomartsession2-kawqv';
 
 // replace with your Stream Auth-token
 const streamSettings = {
-    authToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY3Rpb24iOiIqIiwiZmVlZF9pZCI6IioiLCJyZXNvdXJjZSI6IioifQ._viQA2NCz5tLdzzQF7dPTaWXvQLNrXzHenbrWvlajUM",
-    userId: "scott",
+    authToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY3Rpb24iOiIqIiwiZmVlZF9pZCI6Im5vdGlmaWNhdGlvbnJvYmJlcnQiLCJyZXNvdXJjZSI6ImZlZWQifQ.t-QyCjMWZmctow6UQrUipwEdcYWhN2358Pwt_ZqTO0A",
+    userId: "robbert",
     baseUrl: "https://us-east-api.stream-io-api.com/api/v1.0/feed/notification/",
     apiKeySuffix: "/?api_key=a2h6fsbzmqu2" 
 };
