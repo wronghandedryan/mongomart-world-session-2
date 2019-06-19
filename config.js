@@ -1,5 +1,5 @@
 // replace with your Stitch app ID
-const stitchAppId = 'mongomartsession2-kawqv';
+const stitchAppId = 'YSTITCH_APP_ID';
 
 // replace with your Stream Auth-token
 const streamSettings = {
