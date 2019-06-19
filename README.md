@@ -27,7 +27,7 @@ In [Atlas](https://cloud.mongodb.com):
 
 ## Step 3 — Setting up MongoMart front-end
 
-- Go to https://stackblitz.com/edit/mongomart-world-session-1
+- Go to <https://stackblitz.com/edit/mongomart-world-session-2/>
   - StackBlitz is an online IDE and app server for easily editing code and running apps online
 
 ## StackBlitz
@@ -37,14 +37,15 @@ In [Atlas](https://cloud.mongodb.com):
 ## Step 4 — Setting up MongoMart front-end
 
 - Edit *config.js*: change value of Stitch App ID on line 2 to your Stitch App ID
-  - Change value of *authToken* on line 6 with auth token from this list:
-  | User ID | Auth Token |
-  |---------|------------|
-  | robbert | eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY3Rpb24iOiIqIiwiZmVlZF9pZCI6Im5vdGlmaWNhdGlvbnJvYmJlcnQiLCJyZXNvdXJjZSI6ImZlZWQifQ.t-QyCjMWZmctow6UQrUipwEdcYWhN2358Pwt_ZqTO0A |
+  - Change value of *authToken* on line 6 with auth token from table down below
   - Change value of *userId* on line 7 with your first name
 - Reload Live App (on the right) if you get following error: default app can only be set once; currently set to 'XXX’
 - Your screen should look like this:
 ![Stitch Application](images/step4b.png "MongoMart — Stitch Rules errors")
+
+| User ID | Auth Token |
+| ------- | ---------- |
+| robbert | eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY3Rpb24iOiIqIiwiZmVlZF9pZCI6Im5vdGlmaWNhdGlvbnJvYmJlcnQiLCJyZXNvdXJjZSI6ImZlZWQifQ.t-QyCjMWZmctow6UQrUipwEdcYWhN2358Pwt_ZqTO0A |
 
 ## Step 5 — Importing Data
 
@@ -85,17 +86,19 @@ In [Atlas](https://cloud.mongodb.com):
 - Select your linked Atlas cluster from the *Select Linked Cluster* dropdown
 - Select *mongomart* from the *Database Name* dropdown
 - Select *item* from the *Collection Name* dropdown
+![Stitch Application](images/exercise1b.png "Stitch — Add New Trigger")
 - Check the *Update* checkbox under *Operation Type*
 - Toggle *Full Document* on
 - Select a New Function from the Function dropdown:
   - Optional: name the function
   - Select all sample code and replace with code from *stitch/sendNotification.js* in StackBlitz
   - Replace *userId* and *authToken* on line 2 and 3 with your *userId* and *authToken* from step 4
+![Stitch Application](images/exercise1c.png "Stitch — Function Editor")
 - Click the *Save* button
 - Go to your Live App in StackBlitz
 - On the homepage, click on the *Coffee Mug* product:
 - Click on the *Update Stock* button on the bottom
 - After a slight delay you should see a notification that’s added on the top right:
-![Stitch Application](images/exercise1b.png "Stitch — Notifications")
+![Stitch Application](images/exercise1d.png "Stitch — Notifications")
   - Hover over the notifications icon and select the product from the notifications list to add it to cart
   - Navigate to the *Cart* to double check if the product has been added
